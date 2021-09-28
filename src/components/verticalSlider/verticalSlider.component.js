@@ -46,47 +46,10 @@ function VerticalSlider(props) {
 		// };
 	};
 
-	// const upClick = () => {
-	// 	slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`;
-
-	// 	// const changeSlide = (direction) => {
-	// 	const sliderHeight = sliderContainer.clientHeight;
-	// 	let new_index = activeSlideIndex - 1;
-	// 		// setActiveSlideIndex(new_index);
-
-	// 		if (new_index < 0) {
-	// 		new_index = slidesLength - 1;
-	// 	}
-	// 	setActiveSlideIndex(new_index);
-
-	// 	console.log("active index", activeSlideIndex);
-	// 	slideRight.style.transform = `translateY(-${ activeSlideIndex * sliderHeight }px)`;
-	// 	slideLeft.style.transform = `translateY(${ activeSlideIndex * sliderHeight }px)`;
-	// }
-	// const downClick = () => {
-	// 	slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`;
-
-	// 	// const changeSlide = (direction) => {
-	// 	const sliderHeight = sliderContainer.clientHeight;
-	// 	// if (direction === "up") {
-
-	// 		let new_index = activeSlideIndex + 1;
-
-	// 		if (new_index >= slidesLength) {
-	// 			new_index = 0;
-	// 		}
-	// 		setActiveSlideIndex(new_index);
-	// 	// } else if (direction === "down") {
-
-	// 	console.log("active index", activeSlideIndex);
-	// 	slideRight.style.transform = `translateY(-${ activeSlideIndex  * sliderHeight }px)`;
-	// 	slideLeft.style.transform = `translateY(${ activeSlideIndex  * sliderHeight }px)`;
-	// }
-
+	
 	useEffect(() => {
 		let s_sliderContainer = document.querySelector(".slider");
 		let s_slideLeft = document.querySelector(".image__container__1");
-		// let s_slideRight = document.querySelector(".swiper-slide-right");
 		let s_slideRight = document.querySelector(".swiper-slide-right");
 		let s_slidesLength = s_slideRight.querySelectorAll("div").length;
 
@@ -94,7 +57,7 @@ function VerticalSlider(props) {
 		setSlideRight(s_slideRight);
 		setSlideLeft(s_slideLeft);
 		setSlidesLength(s_slidesLength);
-		slideLeft && (slideLeft.style.top = `-${(slidesLength - 1) * 650}px`);
+		slideLeft && (slideLeft.style.top = `-${(slidesLength - 1) * 86}vh`);
 
 		// window.addEventListener('click',handleWheel);
 		window.addEventListener("wheel", handleWheel);
@@ -103,7 +66,7 @@ function VerticalSlider(props) {
 		return () => {
 			window.removeEventListener("wheel", handleWheel);
 		};
-	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength]);
+	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength, handleWheel]);
 
 	return (
 		<>
@@ -123,7 +86,19 @@ function VerticalSlider(props) {
 						data-swiper-slide-index="0"
 					> */}
 
-				
+
+
+
+
+
+
+
+	
+
+
+
+
+
 					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--dark_pink">
 						<h3>Introducing Connections by athenahealth </h3>
 						<div className="VerticalSlider__slide-desc--EPyLK">
@@ -145,12 +120,6 @@ function VerticalSlider(props) {
 						</div>
 					</section>
 
-
-
-
-
-
-
 					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--pink">
 						<h3>Documentation that writes itself </h3>
 						<div className=" VerticalSlider__slide-desc--EPyLK">
@@ -171,7 +140,6 @@ function VerticalSlider(props) {
 							</a>
 						</div>
 					</section>
-
 
 
 
@@ -205,6 +173,9 @@ function VerticalSlider(props) {
 						</div>
 					</section>
 
+				
+
+
 					{/* </div> */}
 				</div>
 
@@ -220,7 +191,7 @@ function VerticalSlider(props) {
 					<div className="link__container">
 						<span className={activeSlideIndex === 0 ? "active__link" : ""}>
 							{" "}
-							Technology making healthcare more human {activeSlideIndex}
+							Technology making healthcare more human
 						</span>
 						<span className={activeSlideIndex === 1 ? "active__link" : ""}>
 							{" "}
