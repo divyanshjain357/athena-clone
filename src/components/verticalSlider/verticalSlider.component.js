@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./verticalSlider.scss";
+import  {verticalSliderData}  from "./verticalSliderData";
 
 function VerticalSlider(props) {
 	const [sliderContainer, setSliderContainer] = useState(null);
@@ -9,26 +10,39 @@ function VerticalSlider(props) {
 
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
-	const handleWheel = (event) => {
+	let sliderLinks = [
+		{
+			index: 0,
+			text: "Technology making healthcare more human",
+			isActive: false,
+		},
+		{ index: 1, text: "Documentation that write itself", isActive: false },
+		{
+			index: 2,
+			text: "Introducing Connections by athenahealth",
+			isActive: false,
+		},
+	];
+	const handleWheel = (event, direction) => {
+		event && event.preventDefault();
 		const sliderHeight = sliderContainer.clientHeight;
 		//  scroll up
-		if (event.wheelDeltaY < 0) {
-			let new_index = activeSlideIndex + 1;
-			if (new_index > slidesLength - 1) {
-				new_index = 0;
-			}
-			setActiveSlideIndex(new_index);
-			console.log("active index up", activeSlideIndex);
-
-		
-		} else if (event.wheelDeltaY > 0) {
-			// scroll down
+		console.log("event deltay", event.wheelDeltaY);
+		if ((event && event.wheelDeltaY > 0) || direction === "up") {
 			let new_index = activeSlideIndex - 1;
 			if (new_index < 0) {
 				new_index = slidesLength - 1;
 			}
 			setActiveSlideIndex(new_index);
-			console.log("active index down", activeSlideIndex);
+		} else if ((event && event.wheelDeltaY < 0) || direction === "down") {
+			// scroll down
+			
+
+			let new_index = activeSlideIndex + 1;
+			if (new_index > slidesLength - 1) {
+				new_index = 0;
+			}
+			setActiveSlideIndex(new_index);
 		}
 
 		slideLeft.style.transform = `translateY(${
@@ -37,13 +51,24 @@ function VerticalSlider(props) {
 		slideRight.style.transform = `translateY(-${
 			activeSlideIndex * (sliderHeight - 99)
 		}px)`;
+
+		console.log({
+			left: slideLeft.style.transform,
+			right: slideRight.style.transform,
+		});
 	};
 
-	
+	const setActiveSlide = (index) => {
+		if (index < activeSlideIndex) {
+			handleWheel(null, "down");
+		} else if (index > activeSlideIndex) {
+			handleWheel(null, "up");
+		}
+	};
 	useEffect(() => {
 		let s_sliderContainer = document.querySelector(".slider");
-		let s_slideLeft = document.querySelector(".image__container__1");
-		let s_slideRight = document.querySelector(".swiper-slide-right");
+		let s_slideLeft = document.querySelector(".SliderLeft");
+		let s_slideRight = document.querySelector(".SliderRightImageContainer");
 		let s_slidesLength = s_slideRight.querySelectorAll("div").length;
 
 		setSliderContainer(s_sliderContainer);
@@ -52,103 +77,62 @@ function VerticalSlider(props) {
 		setSlidesLength(s_slidesLength);
 		slideLeft && (slideLeft.style.top = `-${(slidesLength - 1) * 86}vh`);
 
-		window.addEventListener("wheel", handleWheel);
+		document.getElementById("slider").addEventListener("wheel", handleWheel);
 
 		// cleanup this component
 		return () => {
-			window.removeEventListener("wheel", handleWheel);
+			document.getElementById("slider") .removeEventListener("wheel", handleWheel);
 		};
 	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength]);
 
 	return (
 		<>
-			<div className="slider">
-
-				<div className="image__container__1">
-		
-					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--dark_pink">
-						<h3>Introducing Connections by athenahealth </h3>
-						<div className="VerticalSlider__slide-desc--EPyLK">
-							<p>
-								We’re discovering what is and isn’t working in healthcare using
-								unique data from the largest, connected network in the industry.
-								See what insights we’ve unlocked at Connections by athenahealth.
-							</p>
-						</div>
-						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
-							{" "}
-							<a className="GlobalCTA__clear_btn--qtkFb " href="" >
-								Check out Dictation{" "}
-							</a>
-						</div>
-					</section>
-
-					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--pink">
-						<h3>Documentation that writes itself </h3>
-						<div className=" VerticalSlider__slide-desc--EPyLK">
-							<p>
-								Accurately document patient encounters in real time with our
-								fully integrated, speech-to-text dictation product powered by
-								Nuance®.
-							</p>
-						</div>
-						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
-							{" "}
-							<a className="GlobalCTA__clear_btn--qtkFb " href="" >
-								Check out documentation{" "}
-							</a>
-						</div>
-					</section>
-
-
-					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--indigo">
-						<h3>
-							Technology making <br />
-							healthcare more human.
-							<br /> Imagine that.
-						</h3>
-						<div className="VerticalSlider__slide-desc--EPyLK">
-							<p>
-								Join 140K providers on the network that seamlessly connects
-								players from across the healthcare ecosystem. We unlock insights
-								that help improve clinician experiences, patient outcomes, and
-								your bottom line.&nbsp;
-							</p>
-						</div>
-						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
-							{" "}
-							<a
-								
-								className="GlobalCTA__clear_btn--qtkFb "
-								href="javascript:void(0)"
-							>
-								Join us{" "}
-							</a>
-						</div>
-					</section>
-
+			<div id="slider" className="slider">
+				<div className="SliderLeft">
+					{verticalSliderData.map((slide) => {
+						return (
+							<section key={slide.index} className={`SliderLeft__slideContainer  ${slide.className}`}>
+								<h3>{slide.title}</h3>
+								<div className="SliderLeft__slide--desc">
+									<p>{slide.content}</p>
+								</div>
+								<div className="SliderLeft__slide--action-container">
+									{" "}
+									<a className="SliderLeft__slideContainer--action" href="">
+										{slide.buttonText}{" "}
+									</a>
+								</div>
+							</section>
+						);
+					})}
 				</div>
 
-				<div className="image__container__2">
-					<div className="swiper-slide swiper-slide-right">
-						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--1"></div>
-						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--2"></div>
-						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--3"></div>
+				<div className="SliderRight">
+					<div className="SliderRightImageContainer">
+						<div className="SliderRight-image SliderRight-image--1"></div>
+						<div className="SliderRight-image SliderRight-image--2"></div>
+						<div className="SliderRight-image SliderRight-image--3"></div>
 					</div>
 
-					<div className="link__container">
-						<span className={activeSlideIndex === 0 ? "active__link" : ""}>
-							{" "}
-							Technology making healthcare more human
-						</span>
-						<span className={activeSlideIndex === 1 ? "active__link" : ""}>
-							{" "}
-							Documentation that write itself{" "}
-						</span>
-						<span className={activeSlideIndex === 2 ? "active__link" : ""}>
-							{" "}
-							Introducing Connections by athenahealth{" "}
-						</span>
+					<div className="linkContainer">
+						{sliderLinks.map((link) => {
+							return (
+								<span
+									key={link.index}
+									className={
+										activeSlideIndex === link.index
+											? "slider--link linkContainer--active"
+											: "slider--link"
+									}
+									onClick={() => {
+										setActiveSlide(link.index);
+									}}
+								>
+									{" "}
+									{link.text}{" "}
+								</span>
+							);
+						})}
 					</div>
 				</div>
 			</div>

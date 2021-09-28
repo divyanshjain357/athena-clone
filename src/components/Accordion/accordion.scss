@@ -1,6 +1,129 @@
-h5{
-    color: #4E2D82;
-}
-// p{
-//     margin-bottom: 2rem;
+@import "../../utils/var.scss";
+@import "../../utils/mixins.scss";
+
+
+// @mixin col {
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: center;
+// 	align-items: center;
 // }
+// @mixin row {
+// 	display: flex;
+// 	flex-direction: row;
+// 	justify-content: center;
+// 	align-items: center;
+// }
+
+.accordion__container {
+	@include col;
+    @include align-items-center;
+    @include justify-content-center;
+	margin: 60px 0;
+
+    h5 {
+        color: $hero-purple;
+        font-size: 31px;
+        text-align: center;
+        font-family: $ptserif-ff;
+        margin:2rem 0;
+    }
+    p{
+        font-size: 17px;
+        width:88%;
+    }
+}
+
+.accordion {
+    @include row;
+    @include align-items-center;
+    @include justify-content-center;
+}
+
+.accordion__container p {
+	color: $black;
+	text-align: center;
+}
+.accordion__children {
+	@include col;
+	max-width: 70%;
+	display: flex;
+}
+.accordion__image__container {
+	height: 420px;
+	overflow: hidden;
+}
+.accordion__tabs {
+    width:560px;
+	nav {
+		ul {
+			li {
+				list-style: none;
+				margin-bottom: 30px;
+				text-align: left;
+				padding-left: 25px;
+				position: relative;
+				width: 528px;
+				cursor: pointer;
+
+                h4{
+                
+                    font-size: 21px;
+                }
+                p{
+                    margin-bottom: 12px;
+                    font-size: 25px !important;
+                    line-height: 31px !important;
+                    font-family: $ptserif-ff !important;
+                    font-weight: 700 !important;
+                    color: $black;
+                    text-align: left;
+                }
+			}
+
+         
+			li.accordion__tab--link::before {
+				top: 0;
+				left: 0;
+				width: 4px;
+				background-color: $gray-light;
+				height: 100%;
+				position: absolute;
+				content: "";
+			}
+			li.accordion__tab--link::after {
+				top: 0;
+				left: 0;
+				width: 4px;
+				height: 0;
+				transition: height 4s ease-out;
+				background-color: $hero-purple;
+				content: "";
+				position: absolute;
+				cursor: pointer;
+			}
+
+			li.active::after {
+				height: 100%;
+				transition: height 4s forwards linear;
+			}
+
+            li.accordion__tab--link.active {
+                h4 {
+                    color: $hero-purple;
+                }
+            }
+            li.accordion__tab--link {
+                h4 {
+                    color: rgb(154, 155, 155);
+                }
+                a {
+                    color: $turtle-green;
+                    text-decoration: underline;
+                    font-weight: 700;
+                }
+            }
+		}
+	}
+}
+
