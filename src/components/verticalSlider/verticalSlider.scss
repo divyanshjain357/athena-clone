@@ -1,0 +1,182 @@
+.slider {
+	display: flex;
+	// width:100%;
+	// border: 1px red solid;
+	// max-height: 631px;
+	margin-top:60px;
+	overflow: hidden;
+	position: relative;
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+
+    max-height: 650px;
+}
+
+.link__container {
+	display: flex;
+    flex-direction: column;
+    color: #000;
+    position: absolute;
+    bottom: 0;
+    background: #fff;
+    width: 100%;
+    height: 100px;
+    line-height: 2;
+    padding: 0 25px;
+}
+
+.active__link{
+	color: #4e2d82;
+	font-weight: bold;
+}
+
+.image__container__1 {
+	width: 60%;
+	height: 100%;
+
+	// height: 100%;
+	// width: 35%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: transform 0.5s ease-in-out;
+}
+.image__container__2 {
+	width: 40%;
+	// height: 80%;
+	height: 100%;
+
+	// overflow: hidden;
+
+	// height: 100%;
+	position: absolute;
+	top: 0;
+	left: 60%;
+	// width: 65%;
+	transition: transform 0.5s ease-in-out;
+}
+
+.swiper-slide {
+	// height:100%;
+	flex-shrink: 0;
+	width: 100%;
+	height: 100%;
+	// position: relative;
+	// transition-property: transform;
+	// overflow: hidden;
+
+	// height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	// // width: 65%;
+	transition: transform 0.5s ease-in-out;
+}
+
+.VerticalSlider__slide-image {
+	background-size: cover;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 85%;
+}
+
+.VerticalSlider__slide-image--1 {
+	background-image: url(http://ahredesignstg.prod.acquia-sites.com/sites/default/files/Hero_1_Healthcare_MoreHuman.png);
+}
+.VerticalSlider__slide-image--2 {
+	background-image: url(http://ahredesignstg.prod.acquia-sites.com/sites/default/files/Hero_2_athenahealth_Dictation.png);
+}
+.VerticalSlider__slide-image--3 {
+	background-image: url(http://ahredesignstg.prod.acquia-sites.com/sites/default/files/Hero_3_ConnectionsByAthenahealth.png);
+}
+
+.VerticalSlider__slide-container--2JQ_o {
+	// background: linear-gradient(56.59deg, #4e2d82 0%, #8a79ac 100%);
+	height: 100%;
+	width: 100%;
+	padding: 141px 94px 0 180px;
+	box-sizing: border-box;
+}
+.VerticalSlider__slide-container--indigo {
+	background: linear-gradient(56.59deg, #4e2d82 0%, #8a79ac 100%);
+}
+
+.VerticalSlider__slide-container--pink{
+    background: linear-gradient(56.59deg, #9C28B1 0%, #B279B7 100%);
+}
+.VerticalSlider__slide-container--dark_pink{
+    background: linear-gradient(56.59deg, #B4005B 0%, #CC638F 100%);
+}
+
+h3 {
+	font-size: 46px;
+	text-align: left;
+	color: #fff;
+	font-family: var(--ptserif-ff) !important;
+}
+p {
+	text-align: left;
+	color: #fff;
+}
+
+.GlobalCTA__clear_btn--qtkFb {
+	border-color: #fff !important;
+	color: #fff !important;
+	background: hsla(210, 1%, 43%, 0.25) !important;
+	border: 2px solid #fff;
+	line-height: 36px !important;
+	padding: 0 25px !important;
+	font-family: var(--sourcesanspro-ff);
+	text-decoration: none;
+	border-radius: 20px 20px 20px 20px;
+	display: inline-block;
+	text-align: center;
+	// font-family: var(--metric-medium-ff);
+	width: fit-content !important;
+	cursor: pointer;
+	min-width: 210px !important;
+}
+
+// .transformUp {
+// 	transform: translate3d(0px, -631px, 0px);
+// 	transition-delay: 0ms;
+// 	transition-duration: 1ms;
+// }
+// .transformDown{
+//     transform: translate3d(0px, -2524px, 0px);
+//     transition-delay: 0ms;
+//     transition-duration: 1ms;
+// }
+
+
+
+
+.action-buttons {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+ .action-buttons button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100000;
+
+}
+
+button{
+    background-color: #fff;
+        border: none;
+        color: #aaa;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 15px;
+
+}
