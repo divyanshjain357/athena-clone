@@ -8,27 +8,21 @@ function VerticalSlider(props) {
 	const [slidesLength, setSlidesLength] = useState(3);
 
 	const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-	// upButton.addEventListener("click", () => changeSlide("up"));
-	// downButton.addEventListener("click", () => changeSlide("down"));
+
 	const handleWheel = (event) => {
-		// slideLeft.style.top = `-${(slidesLength - 1) * 100}vh`;
-		// if(event.target.className.indexOf("VerticalSlider__slide-image") < 0){
-		// 	return;
-		// }
-		// const changeSlide = (direction) => {
 		const sliderHeight = sliderContainer.clientHeight;
-		// if (direction === "up") {
+		//  scroll up
 		if (event.wheelDeltaY < 0) {
 			let new_index = activeSlideIndex + 1;
-			// setActiveSlideIndex(new_index);
 			if (new_index > slidesLength - 1) {
 				new_index = 0;
 			}
 			setActiveSlideIndex(new_index);
 			console.log("active index up", activeSlideIndex);
 
-			// } else if (direction === "down") {
+		
 		} else if (event.wheelDeltaY > 0) {
+			// scroll down
 			let new_index = activeSlideIndex - 1;
 			if (new_index < 0) {
 				new_index = slidesLength - 1;
@@ -43,7 +37,6 @@ function VerticalSlider(props) {
 		slideRight.style.transform = `translateY(-${
 			activeSlideIndex * (sliderHeight - 99)
 		}px)`;
-		// };
 	};
 
 	
@@ -59,46 +52,20 @@ function VerticalSlider(props) {
 		setSlidesLength(s_slidesLength);
 		slideLeft && (slideLeft.style.top = `-${(slidesLength - 1) * 86}vh`);
 
-		// window.addEventListener('click',handleWheel);
 		window.addEventListener("wheel", handleWheel);
 
 		// cleanup this component
 		return () => {
 			window.removeEventListener("wheel", handleWheel);
 		};
-	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength, handleWheel]);
+	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength]);
 
 	return (
 		<>
 			<div className="slider">
-				{/* <div class="action-buttons">
-				<button class="down-button" onClick={upClick}>
-					button
-				</button>
-				<button class="down-button" onClick={downClick}>
-					button
-				</button>
-  			</div> */}
 
 				<div className="image__container__1">
-					{/* <div
-						className="swiper-slide swiper-slide-active"
-						data-swiper-slide-index="0"
-					> */}
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
+		
 					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--dark_pink">
 						<h3>Introducing Connections by athenahealth </h3>
 						<div className="VerticalSlider__slide-desc--EPyLK">
@@ -110,11 +77,7 @@ function VerticalSlider(props) {
 						</div>
 						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
 							{" "}
-							<a
-								id="g_cta"
-								className="GlobalCTA__clear_btn--qtkFb "
-								href="javascript:void(0)"
-							>
+							<a className="GlobalCTA__clear_btn--qtkFb " href="" >
 								Check out Dictation{" "}
 							</a>
 						</div>
@@ -131,20 +94,11 @@ function VerticalSlider(props) {
 						</div>
 						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
 							{" "}
-							<a
-								id="g_cta"
-								className="GlobalCTA__clear_btn--qtkFb "
-								href="javascript:void(0)"
-							>
+							<a className="GlobalCTA__clear_btn--qtkFb " href="" >
 								Check out documentation{" "}
 							</a>
 						</div>
 					</section>
-
-
-
-
-
 
 
 					<section className="VerticalSlider__slide-container--2JQ_o VerticalSlider__slide-container--indigo">
@@ -164,7 +118,7 @@ function VerticalSlider(props) {
 						<div className="VerticalSlider__slide-cta-wrap--uSnQA">
 							{" "}
 							<a
-								id="g_cta"
+								
 								className="GlobalCTA__clear_btn--qtkFb "
 								href="javascript:void(0)"
 							>
@@ -173,20 +127,14 @@ function VerticalSlider(props) {
 						</div>
 					</section>
 
-				
-
-
-					{/* </div> */}
 				</div>
 
 				<div className="image__container__2">
-					{/* <div> */}
 					<div className="swiper-slide swiper-slide-right">
 						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--1"></div>
 						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--2"></div>
 						<div className="VerticalSlider__slide-image VerticalSlider__slide-image--3"></div>
 					</div>
-					{/* </div> */}
 
 					<div className="link__container">
 						<span className={activeSlideIndex === 0 ? "active__link" : ""}>
