@@ -4,23 +4,30 @@ import { accordionData } from "./accordionData";
 const AccordionItem = (props) => {
 	var interval = null;
 	var index = 0;
-	const [animateElement, setAnimateElement] = useState(false);
+	const [animateElement, setAnimateElement] = useState(null);
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
+	const [manual, setManualStatus] = useState(false);
 
 	const changeStateAndImage = (obj) => {
-		interval && clearInterval(interval);
-		interval = null;
+		// interval && clearInterval(interval);
+		// interval = null;
 		index = null;
 		setAnimateElement(true);
-		for (let new_index = 0; new_index < accordionData.length; new_index++) {
-			if (obj.index === new_index) {
-				accordionData[new_index].isActive = !obj.isActive;
-				setActiveItemIndex(new_index);
-				props.setActiveImage(accordionData[new_index].image);
-			} else {
-				accordionData[new_index].isActive = false;
-			}
-		}
+		setManualStatus(true);
+		setActiveItemIndex(obj.index);
+		props.setActiveImage(obj.image);
+
+		console.log("manual", manual);
+		console.log("setAnimate", animateElement);
+		// for (let new_index = 0; new_index < accordionData.length; new_index++) {
+		// 	if (obj.index === new_index) {
+		// 		accordionData[new_index].isActive = !obj.isActive;
+		// 		// setActiveItemIndex(new_index);
+		// 		props.setActiveImage(accordionData[new_index].image);
+		// 	} else {
+		// 		accordionData[new_index].isActive = false;
+		// 	}
+		// }
 	};
 
 	function isInViewport(el) {
@@ -34,9 +41,10 @@ const AccordionItem = (props) => {
 		);
 	}
 
-	function setupInterval() {
-		console.log("interval called");
-		interval = setInterval(() => {
+	useEffect(() => {
+		const intervaal = setInterval(() => {
+			if (manual) clearInterval(intervaal);
+			console.log("interval", index, manual);
 			if (index === null) {
 				clearInterval(interval);
 				return;
@@ -48,10 +56,30 @@ const AccordionItem = (props) => {
 			}
 			index++;
 			if (index > accordionData.length) {
-				clearInterval(interval);
+				clearInterval(intervaal);
 			}
-		}, 5000);
-	}
+		}, 3000);
+		return () => clearInterval(intervaal);
+	}, [manual]);
+
+	// function setupInterval() {
+	// 	console.log("interval called");
+	// 	interval = setInterval(() => {
+	// 		if (index === null) {
+	// 			clearInterval(interval);
+	// 			return;
+	// 		}
+
+	// 		if (index < accordionData.length) {
+	// 			setActiveItemIndex(index);
+	// 			props.setActiveImage(accordionData[index].image);
+	// 		}
+	// 		index++;
+	// 		if (index > accordionData.length) {
+	// 			clearInterval(interval);
+	// 		}
+	// 	}, 3000);
+	// }
 
 	function handleScroll() {
 		let accordion = document.querySelector(".accordion__container");
@@ -60,12 +88,12 @@ const AccordionItem = (props) => {
 		if (accordionVisible) {
 			if (!animateElement) {
 				setAnimateElement(true);
-				if (index > accordionData.length) {
-					clearInterval(interval);
-					interval = null;
-				} else {
-					!interval && setupInterval();
-				}
+				// if (index > accordionData.length) {
+				// 	clearInterval(interval);
+				// 	interval = null;
+				// } else {
+				// !interval && setupInterval();
+				// }
 			}
 		}
 	}
