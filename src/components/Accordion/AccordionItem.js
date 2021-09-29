@@ -29,7 +29,10 @@ const AccordionItem = (props) => {
 
 	useEffect(() => {
 		const intervaal = setInterval(() => {
-			if (manual) clearInterval(intervaal);
+			if (manual) {
+				clearInterval(intervaal);
+				return;
+			}
 			if (index === null) {
 				clearInterval(interval);
 				return;
