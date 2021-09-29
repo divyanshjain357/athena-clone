@@ -1,17 +1,16 @@
-@mixin row{
-    display: flex;
-    flex-direction: row;
+@mixin row {
+	display: flex;
+	flex-direction: row;
 }
 
 @mixin col {
-    display: flex;
-    flex-direction: column; 
+	display: flex;
+	flex-direction: column;
 }
 
 @mixin justify-content-center {
-    justify-content: center;
+	justify-content: center;
 }
 @mixin align-items-center {
-    align-items:center;
-    
+	align-items: center;
 }

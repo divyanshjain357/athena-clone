@@ -36,7 +36,6 @@ function VerticalSlider(props) {
 			setActiveSlideIndex(new_index);
 		} else if ((event && event.wheelDeltaY < 0) || direction === "down") {
 			// scroll down
-
 			let new_index = activeSlideIndex + 1;
 			if (new_index > slidesLength - 1) {
 				new_index = 0;
