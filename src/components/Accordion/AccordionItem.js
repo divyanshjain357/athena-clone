@@ -3,7 +3,7 @@ import { accordionData } from "./accordionData";
 
 const AccordionItem = (props) => {
 	var interval = null;
-	var index = 0;
+	var index = 1;
 	const [animateElement, setAnimateElement] = useState(null);
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
 	const [manual, setManualStatus] = useState(false);
