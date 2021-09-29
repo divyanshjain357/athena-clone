@@ -80,7 +80,7 @@
 	box-sizing: border-box;
 }
 .SliderLeft__slide--indigo {
-	background: linear-gradient(56.59deg, $hero-purple 0%, $purple-shade1 100%);
+	background: linear-gradient(56.59deg, $purple-shade1 0%, $purple-shade2 100%);
 }
 
 .SliderLeft__slide--pink{
@@ -94,7 +94,7 @@ h3 {
 	font-size: 46px;
 	text-align: left;
 	color: $white;
-	font-family: $ptserif-ff !important;
+	font-family: $ptserif !important;
 }
 p {
 	text-align: left;
@@ -107,7 +107,7 @@ p {
 	border: 2px solid $white;
 	line-height: 36px !important;
 	padding: 0 25px !important;
-	font-family: $sourcesanspro-ff;
+	font-family: $sourcesanspro;
 	text-decoration: none;
 	border-radius: 20px 20px 20px 20px;
 	display: inline-block;

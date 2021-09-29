@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { accordionData } from "./accordionData";
 
-const Accordion = (props) => {
+const Accordion =(props) => {
+	// //console.log("ref", ref);
 	const [isActive, setIsActive] = useState(props.isActive);
     // useEffect(()=>{
     //     setIsActive(props.isActive);
-    //     console.log(isActive);
+    //     //console.log(isActive);
     // },[props.isActive, props, isActive]);
     const changeStateAndImage = (activeState)=>{
         props.setActiveImage(props.imageURL, props.index);
