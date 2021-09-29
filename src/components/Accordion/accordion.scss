@@ -1,19 +1,6 @@
 @import "../../utils/var.scss";
 @import "../../utils/mixins.scss";
 
-// @mixin col {
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: center;
-// 	align-items: center;
-// }
-// @mixin row {
-// 	display: flex;
-// 	flex-direction: row;
-// 	justify-content: center;
-// 	align-items: center;
-// }
-
 .accordion__container {
 	@include col;
 	@include align-items-center;
@@ -32,19 +19,18 @@
 		width: 88%;
 	}
 }
-
 .accordion {
 	@include row;
 	@include align-items-center;
 	@include justify-content-center;
 }
-
 .accordion__container p {
 	color: $black;
 	text-align: center;
 }
 .accordion__children {
 	@include col;
+	@include align-items-center;
 	max-width: 70%;
 	display: flex;
 }
@@ -64,7 +50,6 @@
 				position: relative;
 				width: 528px;
 				cursor: pointer;
-
 				h4 {
 					font-size: 21px;
 				}
@@ -78,7 +63,6 @@
 					text-align: left;
 				}
 			}
-
 			li.accordion__tab--link::before {
 				top: 0;
 				left: 0;
@@ -99,12 +83,9 @@
 				position: absolute;
 				cursor: pointer;
 			}
-
 			li.active::after {
 				height: 100%;
-				// transition: height 4s forwards linear;
 			}
-
 			li.accordion__tab--link.active {
 				h4 {
 					color: $purple-shade1;
