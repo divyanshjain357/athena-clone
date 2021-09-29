@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./verticalSlider.scss";
-import  {verticalSliderData}  from "./verticalSliderData";
+import { verticalSliderData } from "./verticalSliderData";
 
 function VerticalSlider(props) {
 	const [sliderContainer, setSliderContainer] = useState(null);
@@ -36,7 +36,6 @@ function VerticalSlider(props) {
 			setActiveSlideIndex(new_index);
 		} else if ((event && event.wheelDeltaY < 0) || direction === "down") {
 			// scroll down
-			
 
 			let new_index = activeSlideIndex + 1;
 			if (new_index > slidesLength - 1) {
@@ -52,10 +51,10 @@ function VerticalSlider(props) {
 			activeSlideIndex * (sliderHeight - 99)
 		}px)`;
 
-		//console.log({
-			left: slideLeft.style.transform,
-			right: slideRight.style.transform,
-		});
+		// //console.log({
+		// 	left: slideLeft.style.transform,
+		// 	right: slideRight.style.transform,
+		// });
 	};
 
 	const setActiveSlide = (index) => {
@@ -81,7 +80,9 @@ function VerticalSlider(props) {
 
 		// cleanup this component
 		return () => {
-			document.getElementById("slider") .removeEventListener("wheel", handleWheel);
+			document
+				.getElementById("slider")
+				.removeEventListener("wheel", handleWheel);
 		};
 	}, [sliderContainer, slideLeft, slideRight, activeSlideIndex, slidesLength]);
 
@@ -91,7 +92,10 @@ function VerticalSlider(props) {
 				<div className="SliderLeft">
 					{verticalSliderData.map((slide) => {
 						return (
-							<section key={slide.index} className={`SliderLeft__slideContainer  ${slide.className}`}>
+							<section
+								key={slide.index}
+								className={`SliderLeft__slideContainer  ${slide.className}`}
+							>
 								<h3>{slide.title}</h3>
 								<div className="SliderLeft__slide--desc">
 									<p>{slide.content}</p>

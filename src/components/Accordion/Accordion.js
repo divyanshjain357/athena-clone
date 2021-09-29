@@ -1,15 +1,13 @@
-import React,{useEffect, useState, useRef} from "react";
+import React,{ useState} from "react";
 import "./accordion.scss";
 import {accordionData} from "./accordionData";
-import Accordion from "./acc";
-// //console.log(accordionData);
+import AccordionItem from "./AccordionItem";
 function Accordion(props) {
     const [activeImageURL, setActiveImage] = useState(accordionData[0].image);
     const [activeItemIndex, setActiveItemIndex] = useState(1);
     const [animateElement, setAnimateElement] = useState(false);
     var interval = null;
     let index = 1;
-    let childref = useRef();
 
     const setImage = (url, idx) =>{
         for (let index = 0; index < accordionData.length; index++) {
@@ -22,92 +20,6 @@ function Accordion(props) {
         setActiveItemIndex(idx);
     }
    
-    function isInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    
-        );
-    }
-
-    function setupInterval(){
-        interval = setInterval(()=>{
-            // if(index < accordionData.length && accordionData[index].isActive){
-            //     accordionData[index].isActive = false;
-
-            // }
-            
-                if(index < accordionData.length){
-                    setActiveItemIndex(index);
-                    accordionData[index].isActive = true;
-                    setActiveImage(accordionData[index].image);
-                    
-                }
-                //setting previous item visibility to false
-                if(index > 0 && index < accordionData.length){
-                    accordionData[index - 1].isActive = false;
-                }
-                //console.log(accordionData[index -1])
-                index++;
-
-                if(index > accordionData.length){
-                    clearInterval(interval);
-                }
-            // setActiveItemIndex(index);  
-           
-        },1000);
-    }
-    function handleScroll(){
-        let accordion = document.querySelector(".accordion__container");
-            let accordionVisible = isInViewport(accordion);
-            //console.log(accordionVisible);
-            // message.textContent = messageText;
-            
-            if(accordionVisible){
-                
-                if(!animateElement){
-                    setAnimateElement(true);
-                    // callThisfn();
-                    if(index > accordionData.length){
-                        clearInterval(interval);
-                        interval = null;
-                        //console.log("interval cleared");
-                    }
-                    else{
-                        !interval && setupInterval();
-                    } 
-                  
-                    //console.log("callThisfn called", animateElement);
-                }
-                // else{
-                //     //console.log("callThisfn not called", animateElement);
-                //     clearInterval(interval);
-                //     //console.log("cleared");
-                // }
-            }
-        
-        
-    }
-    // const callThisfn= () =>{
-    //     for (let index = 0; index < accordionData.length; index++) {
-     
-    //     }
-    // }
-    // useEffect(() =>{
-    //     let accordion = document.querySelector(".accordion__container");
-    //     document.addEventListener('scroll', handleScroll, {passive: true});
-    //     // if(animateElement){
-
-    //     // }
-    //     //console.log("activeItemIndex", activeItemIndex)
-    //     	// cleanup this component
-	// 	return () => {
-	// 		accordion.removeEventListener("scroll", handleScroll);
-	// 	};
-    // }, [activeItemIndex, animateElement]);
 
 	return ( 
         
@@ -135,11 +47,9 @@ function Accordion(props) {
                     <nav>
                         <ul>
 
-                            {/* <li key={obj.key} className="accordion__tab--link" onClick={() => setIsActive(obj.key, !obj.active)} > */}
                         { accordionData.map((obj, index) => ( 
-                                <Accordion ref={childref} index={obj.index} title={obj.title} content={obj.content} isActive={obj.isActive} setActiveImage={setImage} imageURL ={obj.image} activeIndex={activeItemIndex} link={obj.link}/> 
+                                <AccordionItem  index={obj.index} title={obj.title} content={obj.content} isActive={obj.isActive} setActiveImage={setImage} imageURL ={obj.image} activeIndex={activeItemIndex} link={obj.link}/> 
                                 ) ) } 
-                                {/* </li> */}
                         </ul>
                     </nav>
                 </div>
