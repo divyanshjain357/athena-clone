@@ -1,34 +1,25 @@
-import React, { forwardRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { accordionData } from "./accordionData";
 
 const AccordionItem = (props) => {
 	var interval = null;
-	let index = 1; //console.log("ref", ref);
-
-	const [accordionDataa, setAccData] = useState(accordionData);
-	const [isActive, setIsActive] = useState(props.isActive);
+	var index = 0;
 	const [animateElement, setAnimateElement] = useState(false);
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
-	const [activeImageURL, setActiveImage] = useState(accordionData[0].image);
 
-	// useEffect(()=>{
-	//     setIsActive(props.isActive);
-	//     //console.log(isActive);
-	// },[props.isActive, props, isActive]);
 	const changeStateAndImage = (obj, activeState) => {
-		// props.setActiveImage(props.imageURL, props.index);
-		// obj.isActive = activeState;
-		for (let index = 0; index < accordionDataa.length; index++) {
-			let new_index = index;
+		index = null;
+		for (let new_index = 0; new_index < accordionData.length; new_index++) {
 			if (obj.index === new_index) {
-				accordionDataa[new_index].isActive = !obj.isActive;
-				setActiveItemIndex(index);
+				accordionData[new_index].isActive = !obj.isActive;
+				setActiveItemIndex(new_index);
+				props.setActiveImage(accordionData[new_index].image);
 			} else {
-				accordionDataa[new_index].isActive = false;
+				accordionData[new_index].isActive = false;
 			}
 		}
-		console.log("this is accordion data", accordionData);
-		// setIsActive(activeState);
+		interval && clearInterval(interval);
+		setAnimateElement(true);
 	};
 
 	function isInViewport(el) {
@@ -44,105 +35,73 @@ const AccordionItem = (props) => {
 
 	function setupInterval() {
 		interval = setInterval(() => {
-			// if(index < accordionDataa.length && accordionDataa[index].isActive){
-			//     accordionDataa[index].isActive = false;
-
-			// }
-
-			if (index < accordionDataa.length) {
-				setActiveItemIndex(index);
-				accordionDataa[index].isActive = true;
-				setActiveImage(accordionDataa[index].image);
+			if (index === null) {
+				clearInterval(interval);
+				return;
 			}
+
 			//setting previous item visibility to false
-			if (index > 0 && index < accordionDataa.length) {
-				accordionDataa[index - 1].isActive = false;
+			if (index > 0 && index < accordionData.length) {
+				accordionData[index - 1].isActive = false;
 			}
-			//console.log(accordionDataa[index -1])
-			index++;
 
-			if (index > accordionDataa.length) {
+			if (index < accordionData.length) {
+				setActiveItemIndex(index);
+				accordionData[index].isActive = true;
+				props.setActiveImage(accordionData[index].image);
+			}
+			index++;
+			if (index > accordionData.length) {
 				clearInterval(interval);
 			}
-			// setActiveItemIndex(index);
 		}, 1000);
 	}
+
 	function handleScroll() {
 		let accordion = document.querySelector(".accordion__container");
 		let accordionVisible = isInViewport(accordion);
-		//console.log(accordionVisible);
-		// message.textContent = messageText;
 
 		if (accordionVisible) {
 			if (!animateElement) {
 				setAnimateElement(true);
-				// callThisfn();
-				if (index > accordionDataa.length) {
+				if (index > accordionData.length) {
 					clearInterval(interval);
 					interval = null;
-					//console.log("interval cleared");
 				} else {
 					!interval && setupInterval();
 				}
-
-				//console.log("callThisfn called", animateElement);
 			}
-			// else{
-			//     //console.log("callThisfn not called", animateElement);
-			//     clearInterval(interval);
-			//     //console.log("cleared");
-			// }
 		}
 	}
-	// const callThisfn = () => {
-	// 	for (let index = 0; index < accordionDataa.length; index++) {}
-	// };
 
 	useEffect(() => {
 		let accordion = document.querySelector(".accordion__container");
 		document.addEventListener("scroll", handleScroll, { passive: true });
-		// if(animateElement){
-
-		// }
-		//console.log("activeItemIndex", activeItemIndex)
 		// cleanup this component
 		return () => {
 			accordion.removeEventListener("scroll", handleScroll);
 		};
-	}, [props.activeItemIndex, animateElement]);
+	}, [activeItemIndex, animateElement]);
 
-	// <AccordionItem
-	// 	index={obj.index}
-	// 	title={obj.title}
-	// 	content={obj.content}
-	// 	isActive={obj.isActive}
-	// 	setActiveImage={setImage}
-	// 	imageURL={obj.image}
-	// 	activeIndex={activeItemIndex}
-	// 	link={obj.link}
-	// />
 	return (
 		<>
 			<ul>
-				{accordionDataa.map((obj, index) => (
+				{accordionData.map((item, index) => (
 					<li
-						key={obj.index}
+						key={item.index}
 						className={
-							obj.index === activeItemIndex
+							item.index === activeItemIndex
 								? "accordion__tab--link active"
 								: "accordion__tab--link"
 						}
 					>
-						<h4 onClick={() => changeStateAndImage(obj)}>
-							{obj.title} - {obj.isActive}
-						</h4>
+						{" "}
+						<h4 onClick={() => changeStateAndImage(item)}>{item.title}</h4>
 						<>
-							{obj.isActive && (
+							{item.isActive && (
 								<>
-									<p>{obj.content}</p>
-									<a href={obj.link} target="_blank">
-										Read their story
-									</a>
+									<p>{item.content}</p>
+									<a href={item.link}>Read their story</a>
 								</>
 							)}
 						</>

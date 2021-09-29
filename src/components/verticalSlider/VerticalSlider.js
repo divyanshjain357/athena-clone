@@ -27,7 +27,6 @@ function VerticalSlider(props) {
 		event && event.preventDefault();
 		const sliderHeight = sliderContainer.clientHeight;
 		//  scroll up
-		//console.log("event deltay", event.wheelDeltaY);
 		if ((event && event.wheelDeltaY > 0) || direction === "up") {
 			let new_index = activeSlideIndex - 1;
 			if (new_index < 0) {
@@ -50,11 +49,6 @@ function VerticalSlider(props) {
 		slideRight.style.transform = `translateY(-${
 			activeSlideIndex * (sliderHeight - 99)
 		}px)`;
-
-		//console.log({
-		// 	left: slideLeft.style.transform,
-		// 	right: slideRight.style.transform,
-		// });
 	};
 
 	const setActiveSlide = (index) => {

@@ -7,7 +7,7 @@ export const accordionData = [
 		image:
 			"https://caas.athenahealth.com/sites/default/files/HeartFailureSurvivalCenter.png",
 		link: "https://www.athenahealth.com/case-studies/wiggins-worthy-wellness",
-		isActive: true,
+		isActive: false,
 	},
 	{
 		index: 1,
