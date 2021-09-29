@@ -1,16 +1,9 @@
 @import "../../utils/var.scss";
-// .SliderLeft--wrapper {
-// 	position: relative;
-// }
 .slider {
 	display: flex;
-	// margin-top: 60px;
 	overflow: hidden;
-	// position: relative;
-	// top: 60px;
 	position: sticky;
-	top: 59px;
-
+	top: 60px;
 	overflow: hidden;
 	width: 100vw;
 	height: 100vh;

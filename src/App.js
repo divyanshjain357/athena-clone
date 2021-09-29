@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.scss";
 import Header from "./components/header/header.component";
 import VerticalSlider from "./components/verticalSlider/VerticalSlider";

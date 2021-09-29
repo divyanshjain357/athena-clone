@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./accordion.scss";
 import { accordionData } from "./accordionData";
 import AccordionItem from "./AccordionItem";
-// //console.log(accordionData);
 function Accordion(props) {
 	const [activeImageURL, setActiveImage] = useState(accordionData[0].image);
 

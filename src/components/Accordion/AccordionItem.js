@@ -9,25 +9,11 @@ const AccordionItem = (props) => {
 	const [manual, setManualStatus] = useState(false);
 
 	const changeStateAndImage = (obj) => {
-		// interval && clearInterval(interval);
-		// interval = null;
 		index = null;
 		setAnimateElement(true);
 		setManualStatus(true);
 		setActiveItemIndex(obj.index);
 		props.setActiveImage(obj.image);
-
-		console.log("manual", manual);
-		console.log("setAnimate", animateElement);
-		// for (let new_index = 0; new_index < accordionData.length; new_index++) {
-		// 	if (obj.index === new_index) {
-		// 		accordionData[new_index].isActive = !obj.isActive;
-		// 		// setActiveItemIndex(new_index);
-		// 		props.setActiveImage(accordionData[new_index].image);
-		// 	} else {
-		// 		accordionData[new_index].isActive = false;
-		// 	}
-		// }
 	};
 
 	function isInViewport(el) {
@@ -44,12 +30,10 @@ const AccordionItem = (props) => {
 	useEffect(() => {
 		const intervaal = setInterval(() => {
 			if (manual) clearInterval(intervaal);
-			console.log("interval", index, manual);
 			if (index === null) {
 				clearInterval(interval);
 				return;
 			}
-
 			if (index < accordionData.length) {
 				setActiveItemIndex(index);
 				props.setActiveImage(accordionData[index].image);
@@ -62,25 +46,6 @@ const AccordionItem = (props) => {
 		return () => clearInterval(intervaal);
 	}, [manual]);
 
-	// function setupInterval() {
-	// 	console.log("interval called");
-	// 	interval = setInterval(() => {
-	// 		if (index === null) {
-	// 			clearInterval(interval);
-	// 			return;
-	// 		}
-
-	// 		if (index < accordionData.length) {
-	// 			setActiveItemIndex(index);
-	// 			props.setActiveImage(accordionData[index].image);
-	// 		}
-	// 		index++;
-	// 		if (index > accordionData.length) {
-	// 			clearInterval(interval);
-	// 		}
-	// 	}, 3000);
-	// }
-
 	function handleScroll() {
 		let accordion = document.querySelector(".accordion__container");
 		let accordionVisible = isInViewport(accordion);
@@ -88,12 +53,6 @@ const AccordionItem = (props) => {
 		if (accordionVisible) {
 			if (!animateElement) {
 				setAnimateElement(true);
-				// if (index > accordionData.length) {
-				// 	clearInterval(interval);
-				// 	interval = null;
-				// } else {
-				// !interval && setupInterval();
-				// }
 			}
 		}
 	}
