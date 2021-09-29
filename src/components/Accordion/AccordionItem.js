@@ -10,8 +10,8 @@ const AccordionItem = (props) => {
 	const changeStateAndImage = (obj) => {
 		interval && clearInterval(interval);
 		interval = null;
-		setAnimateElement(true);
 		index = null;
+		setAnimateElement(true);
 		for (let new_index = 0; new_index < accordionData.length; new_index++) {
 			if (obj.index === new_index) {
 				accordionData[new_index].isActive = !obj.isActive;
@@ -35,27 +35,22 @@ const AccordionItem = (props) => {
 	}
 
 	function setupInterval() {
+		console.log("interval called");
 		interval = setInterval(() => {
 			if (index === null) {
 				clearInterval(interval);
 				return;
 			}
 
-			/* //setting previous item visibility to false
-			// if (index > 0 && index < accordionData.length) {
-			// 	accordionData[index - 1].isActive = false;
-			//} */
-
 			if (index < accordionData.length) {
 				setActiveItemIndex(index);
-				// accordionData[index].isActive = true;
 				props.setActiveImage(accordionData[index].image);
 			}
 			index++;
 			if (index > accordionData.length) {
 				clearInterval(interval);
 			}
-		}, 3000);
+		}, 5000);
 	}
 
 	function handleScroll() {
@@ -77,8 +72,7 @@ const AccordionItem = (props) => {
 
 	useEffect(() => {
 		let accordion = document.querySelector(".accordion__container");
-		document.addEventListener("scroll", handleScroll, { passive: true });
-		// intervalCode();
+		document.addEventListener("scroll", handleScroll);
 		// cleanup this component
 		return () => {
 			accordion.removeEventListener("scroll", handleScroll);
