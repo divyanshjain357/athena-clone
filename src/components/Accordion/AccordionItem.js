@@ -7,7 +7,10 @@ const AccordionItem = (props) => {
 	const [animateElement, setAnimateElement] = useState(false);
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
 
-	const changeStateAndImage = (obj, activeState) => {
+	const changeStateAndImage = (obj) => {
+		interval && clearInterval(interval);
+		interval = null;
+		setAnimateElement(true);
 		index = null;
 		for (let new_index = 0; new_index < accordionData.length; new_index++) {
 			if (obj.index === new_index) {
@@ -18,8 +21,6 @@ const AccordionItem = (props) => {
 				accordionData[new_index].isActive = false;
 			}
 		}
-		interval && clearInterval(interval);
-		setAnimateElement(true);
 	};
 
 	function isInViewport(el) {
@@ -40,21 +41,21 @@ const AccordionItem = (props) => {
 				return;
 			}
 
-			//setting previous item visibility to false
-			if (index > 0 && index < accordionData.length) {
-				accordionData[index - 1].isActive = false;
-			}
+			/* //setting previous item visibility to false
+			// if (index > 0 && index < accordionData.length) {
+			// 	accordionData[index - 1].isActive = false;
+			//} */
 
 			if (index < accordionData.length) {
 				setActiveItemIndex(index);
-				accordionData[index].isActive = true;
+				// accordionData[index].isActive = true;
 				props.setActiveImage(accordionData[index].image);
 			}
 			index++;
 			if (index > accordionData.length) {
 				clearInterval(interval);
 			}
-		}, 1000);
+		}, 3000);
 	}
 
 	function handleScroll() {
@@ -77,6 +78,7 @@ const AccordionItem = (props) => {
 	useEffect(() => {
 		let accordion = document.querySelector(".accordion__container");
 		document.addEventListener("scroll", handleScroll, { passive: true });
+		// intervalCode();
 		// cleanup this component
 		return () => {
 			accordion.removeEventListener("scroll", handleScroll);
@@ -98,7 +100,7 @@ const AccordionItem = (props) => {
 						{" "}
 						<h4 onClick={() => changeStateAndImage(item)}>{item.title}</h4>
 						<>
-							{item.isActive && (
+							{item.index === activeItemIndex && (
 								<>
 									<p>{item.content}</p>
 									<a href={item.link}>Read their story</a>

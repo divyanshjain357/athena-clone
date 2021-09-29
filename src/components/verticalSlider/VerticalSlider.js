@@ -23,17 +23,17 @@ function VerticalSlider(props) {
 			isActive: false,
 		},
 	];
-	const handleWheel = (event, direction) => {
+	const handleWheel = (event) => {
 		event && event.preventDefault();
 		const sliderHeight = sliderContainer.clientHeight;
 		let new_index = 0;
 		//  scroll up
-		if ((event && event.wheelDeltaY > 0) || direction === "up") {
+		if (event && event.wheelDeltaY > 0) {
 			new_index = activeSlideIndex - 1;
 			if (new_index < 0) {
 				new_index = slidesLength - 1;
 			}
-		} else if ((event && event.wheelDeltaY < 0) || direction === "down") {
+		} else if (event && event.wheelDeltaY < 0) {
 			// scroll down
 			new_index = activeSlideIndex + 1;
 			if (new_index > slidesLength - 1) {
@@ -49,12 +49,14 @@ function VerticalSlider(props) {
 	};
 
 	const setActiveSlide = (index) => {
-		if (index < activeSlideIndex) {
-			handleWheel(null, "down");
-		} else if (index > activeSlideIndex) {
-			handleWheel(null, "up");
-		}
+		const sliderHeight = sliderContainer.clientHeight;
+		slideLeft.style.transform = `translateY(${index * sliderHeight}px)`;
+		slideRight.style.transform = `translateY(-${
+			index * (sliderHeight - 99)
+		}px)`;
+		setActiveSlideIndex(index);
 	};
+
 	useEffect(() => {
 		let s_sliderContainer = document.querySelector(".slider");
 		let s_slideLeft = document.querySelector(".SliderLeft");
@@ -78,6 +80,7 @@ function VerticalSlider(props) {
 	return (
 		<>
 			<div id="slider" className="slider">
+				{/* <div className="SliderLeft--wrapper"> */}
 				<div className="SliderLeft">
 					{verticalSliderData.map((slide) => {
 						return (
@@ -99,6 +102,7 @@ function VerticalSlider(props) {
 						);
 					})}
 				</div>
+				{/* </div> */}
 
 				<div className="SliderRight">
 					<div className="SliderRightImageContainer">
