@@ -4,13 +4,13 @@ import { accordionData } from "./accordionData";
 const AccordionItem = (props) => {
 	var interval = null;
 	var index = 1;
-	const [animateElement, setAnimateElement] = useState(null);
+	const [autoAnimate, setAutoAnimate] = useState(null);
 	const [activeItemIndex, setActiveItemIndex] = useState(0);
 	const [manual, setManualStatus] = useState(false);
 
 	const changeStateAndImage = (obj) => {
 		index = null;
-		setAnimateElement(true);
+		// setAutoAnimate(true);
 		setManualStatus(true);
 		setActiveItemIndex(obj.index);
 		props.setActiveImage(obj.image);
@@ -28,13 +28,14 @@ const AccordionItem = (props) => {
 	}
 
 	useEffect(() => {
+		if (!autoAnimate) return;
 		const intervaal = setInterval(() => {
 			if (manual) {
 				clearInterval(intervaal);
 				return;
 			}
 			if (index === null) {
-				clearInterval(interval);
+				clearInterval(intervaal);
 				return;
 			}
 			if (index < accordionData.length) {
@@ -47,15 +48,15 @@ const AccordionItem = (props) => {
 			}
 		}, 3000);
 		return () => clearInterval(intervaal);
-	}, [manual]);
+	}, [manual, autoAnimate]);
 
 	function handleScroll() {
 		let accordion = document.querySelector(".accordion__container");
 		let accordionVisible = isInViewport(accordion);
 
 		if (accordionVisible) {
-			if (!animateElement) {
-				setAnimateElement(true);
+			if (!autoAnimate) {
+				setAutoAnimate(true);
 			}
 		}
 	}
@@ -67,7 +68,7 @@ const AccordionItem = (props) => {
 		return () => {
 			accordion.removeEventListener("scroll", handleScroll);
 		};
-	}, [activeItemIndex, animateElement]);
+	}, [activeItemIndex, manual, autoAnimate]);
 
 	return (
 		<>
