@@ -1,29 +1,29 @@
 @import "../../utils/var.scss";
 .slider {
 	display: flex;
-	margin-top:60px;
+	margin-top: 60px;
 	overflow: hidden;
 	position: relative;
 	overflow: hidden;
 	width: 100vw;
 	height: 100vh;
-    max-height: 650px;
+	max-height: 650px;
 }
 
 .linkContainer {
 	display: flex;
-    flex-direction: column;
-    color: $black;
-    position: absolute;
-    bottom: 0;
-    background: $white;
-    width: 100%;
-    height: 100px;
-    line-height: 2;
-    padding: 0 25px;
+	flex-direction: column;
+	color: $black;
+	position: absolute;
+	bottom: 0;
+	background: $white;
+	width: 100%;
+	height: 100px;
+	line-height: 2;
+	padding: 0 25px;
 }
 
-.linkContainer--active{
+.linkContainer--active {
 	color: #4e2d82;
 	font-weight: bold;
 }
@@ -83,11 +83,15 @@
 	background: linear-gradient(56.59deg, $purple-shade1 0%, $purple-shade2 100%);
 }
 
-.SliderLeft__slide--pink{
-    background: linear-gradient(56.59deg, $magenta-shade1  0%, $magenta-shade2 100%);
+.SliderLeft__slide--pink {
+	background: linear-gradient(
+		56.59deg,
+		$magenta-shade1 0%,
+		$magenta-shade2 100%
+	);
 }
-.SliderLeft__slide--dark_pink{
-    background: linear-gradient(56.59deg, $pink-shade1  0%, $pink-shade2 100%);
+.SliderLeft__slide--dark_pink {
+	background: linear-gradient(56.59deg, $pink-shade1 0%, $pink-shade2 100%);
 }
 
 h3 {
@@ -112,23 +116,20 @@ p {
 	border-radius: 20px 20px 20px 20px;
 	display: inline-block;
 	text-align: center;
-	// font-family: $metric-medium-ff;
 	width: fit-content !important;
 	cursor: pointer;
 	min-width: 210px !important;
 }
 
-
-button{
-    background-color: $white;
-        border: none;
-        color: #aaa;
-        cursor: pointer;
-        font-size: 16px;
-        padding: 15px;
-
+button {
+	background-color: $white;
+	border: none;
+	color: #aaa;
+	cursor: pointer;
+	font-size: 16px;
+	padding: 15px;
 }
 
-.slider--link{
+.slider--link {
 	cursor: pointer;
 }

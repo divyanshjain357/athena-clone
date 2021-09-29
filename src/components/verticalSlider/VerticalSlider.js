@@ -26,29 +26,26 @@ function VerticalSlider(props) {
 	const handleWheel = (event, direction) => {
 		event && event.preventDefault();
 		const sliderHeight = sliderContainer.clientHeight;
+		let new_index = 0;
 		//  scroll up
 		if ((event && event.wheelDeltaY > 0) || direction === "up") {
-			let new_index = activeSlideIndex - 1;
+			new_index = activeSlideIndex - 1;
 			if (new_index < 0) {
 				new_index = slidesLength - 1;
 			}
-			setActiveSlideIndex(new_index);
 		} else if ((event && event.wheelDeltaY < 0) || direction === "down") {
 			// scroll down
-
-			let new_index = activeSlideIndex + 1;
+			new_index = activeSlideIndex + 1;
 			if (new_index > slidesLength - 1) {
 				new_index = 0;
 			}
-			setActiveSlideIndex(new_index);
 		}
 
-		slideLeft.style.transform = `translateY(${
-			activeSlideIndex * sliderHeight
-		}px)`;
+		slideLeft.style.transform = `translateY(${new_index * sliderHeight}px)`;
 		slideRight.style.transform = `translateY(-${
-			activeSlideIndex * (sliderHeight - 99)
+			new_index * (sliderHeight - 99)
 		}px)`;
+		setActiveSlideIndex(new_index);
 	};
 
 	const setActiveSlide = (index) => {
@@ -69,9 +66,7 @@ function VerticalSlider(props) {
 		setSlideLeft(s_slideLeft);
 		setSlidesLength(s_slidesLength);
 		slideLeft && (slideLeft.style.top = `-${(slidesLength - 1) * 86}vh`);
-
 		document.getElementById("slider").addEventListener("wheel", handleWheel);
-
 		// cleanup this component
 		return () => {
 			document
@@ -127,7 +122,7 @@ function VerticalSlider(props) {
 									}}
 								>
 									{" "}
-									{link.text}{" "}
+									{link.text}
 								</span>
 							);
 						})}
